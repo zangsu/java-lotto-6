@@ -36,4 +36,20 @@ public enum LottoResult {
                 .findFirst()
                 .orElse(NONE);
     }
+
+    public Money getPrize() {
+        return prize;
+    }
+
+    public int getPrice() {
+        return prize.getPrice();
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusNeed() {
+        return bonusballMatchCondition == MATCH;
+    }
 }

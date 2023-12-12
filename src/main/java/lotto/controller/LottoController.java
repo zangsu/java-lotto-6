@@ -7,6 +7,8 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.generator.LottoGenerator;
+import lotto.domain.lotto.result.LottoResult;
+import lotto.domain.lotto.result.Results;
 import lotto.domain.money.Cash;
 import lotto.exception.LottoExceptionMaker;
 import lotto.exception.handler.RetryHandler;
@@ -25,6 +27,14 @@ public class LottoController {
         Money purchaseMoney = RetryHandler.getOrRetry(() -> getPurchaseMoney());
         Lottos lottos = purchaseLotto(purchaseMoney);
         AnswerLotto answer = getAnswerLotto();
+        Results results = getResults(lottos, answer);
+        outputView.printResults(results.getResultAndCount());
+        outputView.printProfitRate(results.getProfitRate(purchaseMoney));
+    }
+
+    private Results getResults(Lottos lottos, AnswerLotto answer) {
+        List<LottoResult> lottoResults = lottos.calcResult(answer);
+        return new Results(lottoResults);
     }
 
     private AnswerLotto getAnswerLotto() {
