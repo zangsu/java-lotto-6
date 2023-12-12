@@ -1,7 +1,6 @@
 package lotto.domain.lotto;
 
 import java.util.List;
-import java.util.function.Consumer;
 import lotto.domain.lotto.result.LottoResult;
 
 public class Lottos {
@@ -11,7 +10,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<LottoResult> calcResult(AnswerLotto answerLotto){
+    public List<LottoResult> calcResult(AnswerLotto answerLotto) {
         return lottos.stream()
                 .map(lotto -> LottoResult.of(answerLotto, lotto))
                 .toList();

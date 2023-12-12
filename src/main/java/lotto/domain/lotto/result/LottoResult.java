@@ -5,7 +5,6 @@ import static lotto.domain.lotto.result.BonusballMatchCondition.MATCH;
 import static lotto.domain.lotto.result.BonusballMatchCondition.NOT_MATCH;
 
 import java.util.Arrays;
-import java.util.function.BiPredicate;
 import lotto.domain.lotto.AnswerLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.money.Money;
@@ -20,7 +19,7 @@ public enum LottoResult {
 
     private final Money prize;
     private final int matchCount;
-    private BonusballMatchCondition bonusballMatchCondition;
+    private final BonusballMatchCondition bonusballMatchCondition;
 
 
     LottoResult(int matchCount, int prize, BonusballMatchCondition bonusballMatchCondition) {
@@ -35,10 +34,6 @@ public enum LottoResult {
                 .filter(lottoResult -> lottoResult.bonusballMatchCondition.compareBonusNumber(answerLotto, lotto))
                 .findFirst()
                 .orElse(NONE);
-    }
-
-    public Money getPrize() {
-        return prize;
     }
 
     public int getPrice() {

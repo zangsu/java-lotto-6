@@ -17,14 +17,15 @@ public class Results {
     }
 
     private void add(LottoResult lottoResult) {
-        if(lottoResult != LottoResult.NONE)
+        if (lottoResult != LottoResult.NONE) {
             results.put(lottoResult, results.get(lottoResult) + 1);
+        }
     }
 
     public List<ResultAndCount> getResultAndCount() {
         return Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult != LottoResult.NONE)
-                .sorted(Comparator.comparing(LottoResult::getPrize))
+                .sorted(Comparator.comparing(LottoResult::getPrice))
                 .map(lottoResult -> new ResultAndCount(lottoResult, results.get(lottoResult)))
                 .toList();
     }
