@@ -1,10 +1,12 @@
 package lotto.domain.lotto;
 
 import java.util.List;
+import lotto.domain.money.Money;
 import lotto.exception.LottoExceptionMaker;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
+    public static final Money LOTTO_PRICE = new Money(1000);
     private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {

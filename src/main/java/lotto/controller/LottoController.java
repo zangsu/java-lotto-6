@@ -1,17 +1,39 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.generator.LottoGenerator;
+import lotto.domain.money.Cash;
 import lotto.exception.LottoExceptionMaker;
 import lotto.exception.handler.RetryHandler;
-import lotto.money.Money;
+import lotto.domain.money.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-
+    private final LottoGenerator answerGenerator;
+    public LottoController(LottoGenerator userLottoGenerator) {
+        this.answerGenerator = userLottoGenerator;
+    }
     public void run(){
         Money purchaseMoney = RetryHandler.getOrRetry(() -> getPurchaseMoney());
+        Lottos lottos = purchaseLotto(purchaseMoney);
+
+    }
+
+    private Lottos purchaseLotto(Money purchaseMoney) {
+        Cash remainCash = purchaseMoney.toCash();
+        List<Lotto> lottos = new ArrayList<>();
+        while(remainCash.canPurchase(Lotto.LOTTO_PRICE)){
+            remainCash.spend(Lotto.LOTTO_PRICE);
+            lottos.add(answerGenerator.generate());
+        }
+        //todo 출력 여기서 하나?
+        return new Lottos(lottos);
     }
 
     private Money getPurchaseMoney() {
