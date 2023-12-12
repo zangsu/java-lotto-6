@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.exception.LottoExceptionMaker;
+import lotto.exception.handler.RetryHandler;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -10,7 +11,7 @@ public class LottoController {
     private final OutputView outputView = new OutputView();
 
     public void run(){
-        Money purchaseMoney = getPurchaseMoney();
+        Money purchaseMoney = RetryHandler.getOrRetry(() -> getPurchaseMoney());
     }
 
     private Money getPurchaseMoney() {
