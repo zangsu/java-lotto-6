@@ -13,6 +13,7 @@ public class Lotto {
         validate(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
+                .sorted()
                 .toList();
     }
 
@@ -23,7 +24,7 @@ public class Lotto {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException();
+            throw LottoExceptionMaker.INVALID_LOTTO_SIZE.makeException();
         }
     }
 
@@ -37,4 +38,13 @@ public class Lotto {
     }
 
     // TODO: 추가 기능 구현
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .toList();
+    }
 }

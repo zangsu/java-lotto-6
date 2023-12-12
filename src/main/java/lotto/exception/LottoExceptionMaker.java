@@ -12,7 +12,8 @@ public enum LottoExceptionMaker {
     INVALID_VALUE("잘못된 값입니다."),
 
     INVALID_LOTTO_NUMBER("로또 번호는 1~45 사이의 숫자여야 합니다."),
-    DUPLICATED_LOTTO_NUMBER("로또 번호는 중복될 수 없습니다."),;
+    DUPLICATED_LOTTO_NUMBER("로또 번호는 중복될 수 없습니다."),
+    INVALID_LOTTO_SIZE("로또 번호는 6개여야 합니다.");
 
     private final String message;
     private final IllegalArgumentException exception;
