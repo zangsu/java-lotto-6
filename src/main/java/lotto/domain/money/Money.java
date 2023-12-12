@@ -13,16 +13,20 @@ public class Money implements Monetary {
 
     private void validateMoney(int money) {
         if (money < 0) {
-            throw LottoExceptionMaker.MENU_AMOUNT_MUST_POSITIVE.makeException();
+            throw LottoExceptionMaker.MONEY_MUST_NOT_NEGATIVE.makeException();
         }
     }
 
-    public Cash toCash(){
+    public Cash toCash() {
         return new Cash(this.money);
     }
 
     @Override
     public int getPrice() {
         return this.money;
+    }
+
+    public Money multiple(int count) {
+        return new Money(this.money * count);
     }
 }

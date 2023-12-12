@@ -13,16 +13,16 @@ public class AnswerLotto {
     }
 
     private void validateBonusDuplicate(Lotto lottoNumber, LottoNumber bonusNumber) {
-        if(lottoNumber.contains(bonusNumber)) {
+        if (lottoNumber.contains(bonusNumber)) {
             throw LottoExceptionMaker.DUPLICATED_LOTTO_NUMBER.makeException();
         }
     }
 
-    public boolean matchBonusNumber(Lotto lotto){
+    public boolean matchBonusNumber(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
 
-    public int match(Lotto lotto) {
+    public int matchCount(Lotto lotto) {
         return this.lottoNumber.matchCount(lotto);
     }
 }

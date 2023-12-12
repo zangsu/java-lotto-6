@@ -4,15 +4,15 @@ import java.util.function.BiPredicate;
 import lotto.domain.lotto.AnswerLotto;
 import lotto.domain.lotto.Lotto;
 
-public enum BonusballMatchCondition {
+public enum BonusBallMatchCondition {
 
     IGNORE((answerLotto, lotto) -> true),
-    MATCH( AnswerLotto::matchBonusNumber),
-    NOT_MATCH ( MATCH.condition.negate());
+    MATCH(AnswerLotto::matchBonusNumber),
+    NOT_MATCH(MATCH.condition.negate());
 
     private final BiPredicate<AnswerLotto, Lotto> condition;
 
-    BonusballMatchCondition(BiPredicate<AnswerLotto, Lotto> condition) {
+    BonusBallMatchCondition(BiPredicate<AnswerLotto, Lotto> condition) {
         this.condition = condition;
     }
 

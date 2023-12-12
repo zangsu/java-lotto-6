@@ -8,6 +8,7 @@ import java.util.Map;
 import lotto.domain.money.Money;
 
 public class Results {
+    public static final double PERCENT = 100.0;
     private final Map<LottoResult, Integer> results = new EnumMap<>(LottoResult.class);
 
     public Results(List<LottoResult> lottoResults) {
@@ -25,16 +26,16 @@ public class Results {
     public List<ResultAndCount> getResultAndCount() {
         return Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult != LottoResult.NONE)
-                .sorted(Comparator.comparing(LottoResult::getPrice))
+                .sorted(Comparator.comparing(LottoResult::getPrize))
                 .map(lottoResult -> new ResultAndCount(lottoResult, results.get(lottoResult)))
                 .toList();
     }
 
     public double getProfitRate(Money purchaseMoney) {
         long totalPrize = results.entrySet().stream()
-                .mapToLong(entry -> (long) entry.getKey().getPrice() * entry.getValue())
+                .mapToLong(entry -> (long) entry.getKey().getPrize().getPrice() * entry.getValue())
                 .sum();
 
-        return (double) (totalPrize * 100.0) / purchaseMoney.getPrice();
+        return (totalPrize * PERCENT) / purchaseMoney.getPrice();
     }
 }

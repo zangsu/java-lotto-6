@@ -1,8 +1,8 @@
 package lotto.domain.lotto.result;
 
-import static lotto.domain.lotto.result.BonusballMatchCondition.IGNORE;
-import static lotto.domain.lotto.result.BonusballMatchCondition.MATCH;
-import static lotto.domain.lotto.result.BonusballMatchCondition.NOT_MATCH;
+import static lotto.domain.lotto.result.BonusBallMatchCondition.IGNORE;
+import static lotto.domain.lotto.result.BonusBallMatchCondition.MATCH;
+import static lotto.domain.lotto.result.BonusBallMatchCondition.NOT_MATCH;
 
 import java.util.Arrays;
 import lotto.domain.lotto.AnswerLotto;
@@ -19,10 +19,10 @@ public enum LottoResult {
 
     private final Money prize;
     private final int matchCount;
-    private final BonusballMatchCondition bonusballMatchCondition;
+    private final BonusBallMatchCondition bonusballMatchCondition;
 
 
-    LottoResult(int matchCount, int prize, BonusballMatchCondition bonusballMatchCondition) {
+    LottoResult(int matchCount, int prize, BonusBallMatchCondition bonusballMatchCondition) {
         this.matchCount = matchCount;
         this.prize = new Money(prize);
         this.bonusballMatchCondition = bonusballMatchCondition;
@@ -30,21 +30,21 @@ public enum LottoResult {
 
     public static LottoResult of(AnswerLotto answerLotto, Lotto lotto) {
         return Arrays.stream(values())
-                .filter(lottoResult -> lottoResult.matchCount == answerLotto.match(lotto))
+                .filter(lottoResult -> lottoResult.matchCount == answerLotto.matchCount(lotto))
                 .filter(lottoResult -> lottoResult.bonusballMatchCondition.compareBonusNumber(answerLotto, lotto))
                 .findFirst()
                 .orElse(NONE);
     }
 
-    public int getPrice() {
-        return prize.getPrice();
+    public boolean isBonusNeed() {
+        return bonusballMatchCondition == MATCH;
+    }
+
+    public Money getPrize() {
+        return prize;
     }
 
     public int getMatchCount() {
         return matchCount;
-    }
-
-    public boolean isBonusNeed() {
-        return bonusballMatchCondition == MATCH;
     }
 }

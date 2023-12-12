@@ -1,5 +1,7 @@
 package lotto.domain.lotto.result;
 
+import lotto.domain.money.Money;
+
 public class ResultAndCount {
     private final LottoResult lottoResult;
     private final int count;
@@ -13,12 +15,12 @@ public class ResultAndCount {
         return lottoResult;
     }
 
-    public int getMatchCount(){
+    public int getMatchCount() {
         return lottoResult.getMatchCount();
     }
 
-    public int getPrice(){
-        return lottoResult.getPrice();
+    public Money getPrize() {
+        return lottoResult.getPrize();
     }
 
     public int getCount() {

@@ -10,11 +10,10 @@ import lotto.view.io.Printer;
 public class OutputView {
     public static final String EXCEPTION_PREFIX = "[ERROR] ";
     public static final String LOTTO_RESULT_DELIMITER = ", ";
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###,##0");
-    private static final DecimalFormat PERCENT_FORMAT = new DecimalFormat("###,##0.0");
     public static final String NO_BONUS_FORMAT = "%d개 일치 (%s원) - %d개";
     public static final String BONUS_FORMAT = "%d개 일치, 보너스 볼 일치 (%s원) - %d개";
-
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###,##0");
+    private static final DecimalFormat PERCENT_FORMAT = new DecimalFormat("###,##0.0");
     private final Printer printer = new Printer();
 
     public void printException(Exception e) {
@@ -48,12 +47,12 @@ public class OutputView {
                 ---""");
         resultAndCount.forEach(result -> {
             String format = NO_BONUS_FORMAT;
-            if(result.isBonusNeed()) {
+            if (result.isBonusNeed()) {
                 format = BONUS_FORMAT;
             }
             printer.printMessageUsingFormat(format,
                     result.getMatchCount(),
-                    DECIMAL_FORMAT.format(result.getPrice()),
+                    DECIMAL_FORMAT.format(result.getPrize().getPrice()),
                     result.getCount());
         });
     }
