@@ -1,4 +1,4 @@
-package lotto.money;
+package lotto.domain.money;
 
 public interface Monetary extends Comparable<Monetary> {
 

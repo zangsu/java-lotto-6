@@ -1,7 +1,7 @@
-package lotto.money;
+package lotto.domain.money;
 
 
-import racingcar.exception.XXXExceptionMaker;
+import lotto.exception.LottoExceptionMaker;
 
 public class Cash implements Monetary {
     private int cash;
@@ -13,7 +13,7 @@ public class Cash implements Monetary {
 
     private void validateCash(int cash) {
         if (cash < 0) {
-            throw XXXExceptionMaker.MONEY_MUST_NOT_NEGATIVE.makeException();
+            throw LottoExceptionMaker.MONEY_MUST_NOT_NEGATIVE.makeException();
         }
     }
 
@@ -23,7 +23,7 @@ public class Cash implements Monetary {
 
     public void spend(Monetary price) {
         if (compareTo(price) < 0) {
-            throw XXXExceptionMaker.NOT_ENOUGH_MONEY.makeException();
+            throw LottoExceptionMaker.NOT_ENOUGH_MONEY.makeException();
         }
         this.cash -= price.getPrice();
     }
