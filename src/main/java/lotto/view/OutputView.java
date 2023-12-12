@@ -27,6 +27,7 @@ public class OutputView {
                 .map(this::getLottoString)
                 .forEach(lottoString ->
                         printer.printMessageUsingFormat("[%s]", lottoString, LOTTO_RESULT_DELIMITER));
+        newLine();
     }
 
     private String getLottoString(Lotto lotto) {

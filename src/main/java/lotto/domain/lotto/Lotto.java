@@ -47,4 +47,17 @@ public class Lotto {
                 .map(LottoNumber::getNumber)
                 .toList();
     }
+
+    public int matchCount(Lotto lotto) {
+        return (int) numbers.stream()
+                .filter(lotto::contains)
+                .count();
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }

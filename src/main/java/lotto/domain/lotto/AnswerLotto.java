@@ -17,4 +17,12 @@ public class AnswerLotto {
             throw LottoExceptionMaker.DUPLICATED_LOTTO_NUMBER.makeException();
         }
     }
+
+    public boolean matchBonusNumber(Lotto lotto){
+        return lotto.contains(bonusNumber);
+    }
+
+    public int match(Lotto lotto) {
+        return this.lottoNumber.matchCount(lotto);
+    }
 }
