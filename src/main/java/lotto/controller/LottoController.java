@@ -2,7 +2,9 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.lotto.AnswerLotto;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.generator.LottoGenerator;
 import lotto.domain.money.Cash;
@@ -22,7 +24,15 @@ public class LottoController {
     public void run(){
         Money purchaseMoney = RetryHandler.getOrRetry(() -> getPurchaseMoney());
         Lottos lottos = purchaseLotto(purchaseMoney);
+        AnswerLotto answer = getAnswerLotto();
+    }
 
+    private AnswerLotto getAnswerLotto() {
+        Lotto lotto = RetryHandler.getOrRetry(() -> new Lotto(inputView.getLottoNumbers()));
+        return RetryHandler.getOrRetry(() -> {
+            LottoNumber lottoNumber = new LottoNumber(inputView.getBonusNumber());
+            return new AnswerLotto(lotto, lottoNumber);
+        });
     }
 
     private Lottos purchaseLotto(Money purchaseMoney) {
@@ -33,6 +43,7 @@ public class LottoController {
             lottos.add(answerGenerator.generate());
         }
         //todo 출력 여기서 하나?
+        outputView.printLottos(lottos);
         return new Lottos(lottos);
     }
 
